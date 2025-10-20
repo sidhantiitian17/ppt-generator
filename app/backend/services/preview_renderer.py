@@ -6,9 +6,9 @@ from typing import List, TypeAlias
 from PIL import Image, ImageDraw, ImageFont
 from PIL.ImageFont import FreeTypeFont, ImageFont as BitmapFont
 
-FontType: TypeAlias = FreeTypeFont | BitmapFont
-
 from .cache import DiskLRUCache
+
+FontType: TypeAlias = FreeTypeFont | BitmapFont
 
 
 class PreviewRenderer:

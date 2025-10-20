@@ -3,10 +3,10 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Dict
 
-from reportlab.lib.colors import HexColor
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfgen import canvas
+from reportlab.lib.colors import HexColor  # type: ignore[import-untyped]
+from reportlab.pdfbase import pdfmetrics  # type: ignore[import-untyped]
+from reportlab.pdfbase.ttfonts import TTFont  # type: ignore[import-untyped]
+from reportlab.pdfgen import canvas  # type: ignore[import-untyped]
 
 from ..models.deck import SlideDeck, SlideElementImage, SlideElementText
 

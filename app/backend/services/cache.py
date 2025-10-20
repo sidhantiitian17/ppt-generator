@@ -3,7 +3,13 @@ from __future__ import annotations
 import json
 import time
 from pathlib import Path
-from typing import Callable, Optional
+from typing import Callable, Dict, Optional, TypedDict, cast
+
+
+class CacheEntry(TypedDict):
+    path: str
+    size: int
+    last_access: float
 
 
 class DiskLRUCache:
@@ -15,7 +21,7 @@ class DiskLRUCache:
         self.ttl_seconds = ttl_seconds
         self.root.mkdir(parents=True, exist_ok=True)
         self._index_path = self.root / "index.json"
-        self._entries = self._load_index()
+        self._entries: Dict[str, CacheEntry] = self._load_index()
 
     def get(self, key: str) -> Optional[Path]:
         entry = self._entries.get(key)
@@ -65,13 +71,14 @@ class DiskLRUCache:
         self._entries.pop(key, None)
         self._persist()
 
-    def _load_index(self) -> dict[str, dict[str, float]]:
+    def _load_index(self) -> Dict[str, CacheEntry]:
         if not self._index_path.exists():
             return {}
         try:
-            return json.loads(self._index_path.read_text())
+            raw = json.loads(self._index_path.read_text())
         except json.JSONDecodeError:
             return {}
+        return cast(Dict[str, CacheEntry], raw)
 
     def _persist(self) -> None:
         self._index_path.write_text(json.dumps(self._entries))

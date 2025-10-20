@@ -35,6 +35,18 @@ line-length = 100
 python_version = "3.11"
 strict = false
 
+[[tool.mypy.overrides]]
+module = [
+    "fastapi",
+    "fastapi.*",
+    "pydantic",
+    "PIL",
+    "PIL.*",
+    "reportlab",
+    "reportlab.*",
+]
+ignore_missing_imports = true
+
 [build-system]
 requires = ["poetry-core>=1.5.0"]
 build-backend = "poetry.core.masonry.api"

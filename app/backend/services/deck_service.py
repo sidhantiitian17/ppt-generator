@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Iterable
+from typing import Dict, Iterable, Optional
 from uuid import uuid4
 
 from ..models.deck import DeckCreateRequest, DeckUpdateRequest, SlideDeck
@@ -24,7 +24,7 @@ class DeckService:
         if template is None:
             raise KeyError(f"template {payload.template_id} not found")
         now = datetime.utcnow()
-        hints = {
+        hints: Dict[str, Optional[int]] = {
             "keepIntermediates": 0,
             "previewTTL": 3600,
         }

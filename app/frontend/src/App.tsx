@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { DeckEditor } from "./components/DeckEditor";
 import { InspectorPanel } from "./components/InspectorPanel";
 import { TemplateMapper } from "./components/TemplateMapper";
-import { setDecks } from "./state/store";
+import { setDecks, type AppDispatch, type RootState } from "./state/store";
 import { useTemplateStore } from "./state/templates";
 import { Deck, Template } from "./types";
 
@@ -152,10 +152,10 @@ const demoDeck: Deck = {
 };
 
 const App: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const addTemplate = useTemplateStore((state) => state.addTemplate);
   const templateCount = useTemplateStore((state) => state.templates.length);
-  const deckCount = useSelector((state) => state.decks.decks.length);
+  const deckCount = useSelector((state: RootState) => state.decks.decks.length);
 
   useEffect(() => {
     if (templateCount === 0) {

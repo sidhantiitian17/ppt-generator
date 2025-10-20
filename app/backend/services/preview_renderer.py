@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List
+from typing import List, TypeAlias
 
 from PIL import Image, ImageDraw, ImageFont
+from PIL.ImageFont import FreeTypeFont, ImageFont as BitmapFont
+
+FontType: TypeAlias = FreeTypeFont | BitmapFont
 
 from .cache import DiskLRUCache
 
@@ -31,7 +34,7 @@ class PreviewRenderer:
             draw = ImageDraw.Draw(image)
             text = f"{label} {identifier}\nPage {index + 1}"
             try:
-                font_obj = ImageFont.truetype("DejaVuSans.ttf", 28)
+                font_obj: FontType = ImageFont.truetype("DejaVuSans.ttf", 28)
             except OSError:
                 font_obj = ImageFont.load_default()
             text_bbox = draw.multiline_textbbox(

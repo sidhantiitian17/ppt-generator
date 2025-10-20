@@ -1,0 +1,15 @@
+**/__pycache__
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+**/node_modules
+**/.pnpm-store
+**/dist
+**/build
+**/tests/**/fixtures/**
+**/*.pdf
+**/*.pptx
+**/samples/**
+.env
+.git
+.gitignore

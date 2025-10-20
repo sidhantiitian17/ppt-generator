@@ -31,14 +31,24 @@ class PreviewRenderer:
             draw = ImageDraw.Draw(image)
             text = f"{label} {identifier}\nPage {index + 1}"
             try:
-                font_obj: ImageFont.ImageFont = ImageFont.truetype("DejaVuSans.ttf", 28)
+                font_obj = ImageFont.truetype("DejaVuSans.ttf", 28)
             except OSError:
                 font_obj = ImageFont.load_default()
-            font: ImageFont.ImageFont = font_obj
-            text_bbox = draw.multiline_textbbox((0, 0), text, font=font, align="center")
+            text_bbox = draw.multiline_textbbox(
+                (0, 0),
+                text,
+                font=font_obj,
+                align="center",
+            )
             x = (image.width - (text_bbox[2] - text_bbox[0])) // 2
             y = (image.height - (text_bbox[3] - text_bbox[1])) // 2
-            draw.multiline_text((x, y), text, fill=(40, 40, 40), font=font, align="center")
+            draw.multiline_text(
+                (x, y),
+                text,
+                fill=(40, 40, 40),
+                font=font_obj,
+                align="center",
+            )
 
             def _writer(path: Path) -> None:
                 path.parent.mkdir(parents=True, exist_ok=True)

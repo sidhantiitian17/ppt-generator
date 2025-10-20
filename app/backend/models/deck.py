@@ -1,11 +1,11 @@
-from __future__ import annotations
-
 """Core Pydantic models shared across the presentation pipeline.
 
 The data layer mirrors the structures described in the product requirements so
 routers and services can exchange strongly typed payloads.  The models stay
 fairly lightweight – validation and computed helpers live in the service layer.
 """
+
+from __future__ import annotations
 
 from datetime import datetime
 from typing import Dict, List, Literal, Optional, Sequence, Union
